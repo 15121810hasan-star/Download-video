@@ -1,0 +1,8 @@
+{
+  "name": "SnapHD - Universal Video Downloader",
+  "description": "Download HD videos from Facebook, TikTok, YouTube, Instagram and more in 1080p, 720p, and MP3 with one click.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Authenticated user profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "photoURL": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "createdAt"]
+    },
+    "DownloadRecord": {
+      "title": "DownloadRecord",
+      "description": "Persistent record of an extracted or downloaded video with AI enhancements",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "url": { "type": "string", "maxLength": 2048 },
+        "title": { "type": "string", "maxLength": 300 },
+        "platform": { "type": "string", "enum": ["youtube", "tiktok", "facebook", "instagram", "twitter", "other"] },
+        "thumbnail": { "type": "string", "maxLength": 2048 },
+        "quality": { "type": "string", "maxLength": 64 },
+        "isAiEnhanced": { "type": "boolean" },
+        "aiPreset": { "type": "string", "enum": ["none", "ultra_hd_upscale", "denoise_sharpen", "hdr_color_vivid", "face_clarity"] },
+        "downloadedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "url", "title", "platform", "quality", "downloadedAt"]
+    },
+    "AppSetting": {
+      "title": "AppSetting",
+      "description": "Public owner branding and settings for Hasan Mahmud",
+      "type": "object",
+      "properties": {
+        "ownerName": { "type": "string", "maxLength": 100 },
+        "ownerEmail": { "type": "string", "maxLength": 128 },
+        "ownerFacebook": { "type": "string", "maxLength": 256 },
+        "siteTitle": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["ownerName", "ownerEmail", "ownerFacebook"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile document"
+    },
+    "/users/{userId}/downloads/{downloadId}": {
+      "schema": "DownloadRecord",
+      "description": "History of user downloads persisted in Cloud Firestore"
+    },
+    "/app_settings/{settingId}": {
+      "schema": "AppSetting",
+      "description": "Owner profile and application metadata"
+    }
+  }
+}
